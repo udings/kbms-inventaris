@@ -12,15 +12,15 @@ function Login() {
 
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
   try {
     const res = await axios.post("/api/auth/login", { username, password });
 
-    // Simpan token dan data user ke localStorage
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("username", res.data.username);
-    localStorage.setItem("role", res.data.role); // ⬅️ Tambahkan ini!
+    localStorage.setItem("username", res.data.user.username); // ✅ benar
+    localStorage.setItem("role", res.data.user.role);
+    
 
      alert("Login berhasil!");
       router.push("/item-list"); // Ganti dengan halaman setelah login

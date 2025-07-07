@@ -28,7 +28,13 @@ export async function POST(req) {
       { expiresIn: "1h" }
     );
 
-    return NextResponse.json({ token });
+    return NextResponse.json({ 
+  token, 
+  user: {
+    username: user.username,
+    role: user.role
+  }
+});
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });

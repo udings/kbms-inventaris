@@ -112,7 +112,7 @@ function ItemList() {
 
           {token && (
             <>
-              <button onClick={() => (window.location.href = "/items/new")} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">New Stock</button>
+              <button onClick={() => (window.location.href = "new-item")} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">New Stock</button>
               <button onClick={() => { setEditMode((prev) => !prev); setDeleteMode(false); setEditingId(null); }} className={`${editMode ? "bg-yellow-500" : "bg-yellow-400"} text-white px-4 py-2 rounded hover:bg-yellow-600`}>
                 {editMode ? "Exit Edit Mode" : "Edit Mode"}
               </button>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
 "use client";
+
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -23,13 +24,40 @@ function NewItem() {
 
   useEffect(() => {
   const token = localStorage.getItem("token");
-  const userRole = localStorage.getItem("role");
-
-  if (!token || userRole !== "developer") {
-    alert("Anda tidak memiliki akses untuk menambahkan item.");
-    router.push("/not-authorized");
+  if (!token) {
+    router.push("/login");
+    return;
   }
-}, [router]); 
+
+  const fetchUserRole = async () => {
+    try {
+      const res = await axios.get("/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const role = res.data.user?.role;
+      if (role) {
+      localStorage.setItem("role", role);
+      } else {
+        console.warn("Role tidak ditemukan dari /api/auth/me");
+        alert("Gagal mendapatkan role. Silakan login ulang.");
+        router.push("/login");
+      }
+
+
+      if (role !== "developer") {
+        alert("Anda tidak memiliki akses untuk menambahkan item.");
+        router.push("/not-authorized");
+      }
+    } catch (err) {
+      console.error("Gagal ambil data user:", err);
+      router.push("/login");
+    }
+  };
+
+  fetchUserRole();
+}, [router]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
