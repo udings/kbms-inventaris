@@ -76,7 +76,7 @@ function ItemList() {
       
       // ✅ Update state setelah edit berhasil
       setItems(prev => prev.map(item => 
-        item._id === editingId ? { ...item, ...res.data, _id: editingId } : item
+        item._id === editingId ? { ...item, ...dataToSend, _id: editingId } : item
       ));
       
       handleCancelEdit();
