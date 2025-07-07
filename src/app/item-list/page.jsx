@@ -211,7 +211,7 @@ function ItemList() {
       {/* Mobile */}
       <div className="md:hidden flex flex-col gap-4">
         {filteredItems.map((item, index) => (
-          <div key={`mobile-${item._id || index}`} className="border p-4 rounded shadow-sm bg-white">
+          <div key={`mobile-${item._id || index}`} className="border p-4 rounded shadow-sm !bg-white" style={{backgroundColor: 'white'}}>
             <div className="flex justify-between mb-2">
               <h2 className="font-semibold text-lg">{item.nama_aset}</h2>
               <div className="flex gap-2">
